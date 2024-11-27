@@ -57,7 +57,7 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   brownBegin[2]=0.00;
   brownBegin[3]=0.00;
 
-  whiteBegin.resize(4);
+  /*whiteBegin.resize(4);
   whiteBegin[0]=0.00;
   whiteBegin[1]=0.00;
   whiteBegin[2]=0.00;
@@ -67,7 +67,7 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   blackBegin[0]=0.00;
   blackBegin[1]=0.00;
   blackBegin[2]=0.00;
-  blackBegin[3]=0.00; 
+  blackBegin[3]=0.00; */
   
   
   
@@ -244,7 +244,7 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       cout << "Marrom " << brownBegin[0] << '\t' << brownBegin[1] << '\t' << brownBegin[2] << '\t' << brownBegin[3] << endl;
       break;
 
-     case White:
+    /* case White:
       readColor();
       whiteBegin[0] = getRed();
       whiteBegin[1] = getGreen();
@@ -260,16 +260,7 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       blackBegin[2] = getBlue();
       blackBegin[3] = getWhite();
       cout << "Marrom " << blackBegin[0] << '\t' << blackBegin[1] << '\t' << blackBegin[2] << '\t' << blackBegin[3] << endl;
-      break;
-
-      case None:
-      readColor();
-      blackBegin[0] = 0;
-      blackBegin[1] = 0;
-      blackBegin[2] = 0;
-      blackBegin[3] = 0;
-      break;
-
+      break; */
 
 
   }
@@ -284,8 +275,8 @@ COLOR ColorSensorAnalog::getColor(){
   double azul = sqrt(pow(blueBegin[0]-getRed(),2)+ pow(blueBegin[1]-getGreen(),2)+ pow(blueBegin[2]-getBlue(),2));
   double amarelo = sqrt(pow(yellowBegin[0]-getRed(),2)+ pow(yellowBegin[1]-getGreen(),2)+ pow(yellowBegin[2]-getBlue(),2));
   double marrom = sqrt(pow(brownBegin[0]-getRed(),2)+ pow(brownBegin[1]-getGreen(),2)+ pow(brownBegin[2]-getBlue(),2));
-  double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
-  double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
+  //double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
+  //double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
 
     // Determinando a cor com a menor distância
     double menor = vermelho;
@@ -308,14 +299,14 @@ COLOR ColorSensorAnalog::getColor(){
         cor = Brown;
     }
 
-    if (branco < menor) {
+   /* if (branco < menor) {
         menor = marrom;
         cor = White;
     }
     if (preto < menor) {
         menor = marrom;
         cor = Black;
-    } 
+    } */
 
     return cor;
 

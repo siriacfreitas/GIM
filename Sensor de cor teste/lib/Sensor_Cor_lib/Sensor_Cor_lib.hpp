@@ -37,8 +37,8 @@ class ColorSensorAnalog {
     vector<double>blueBegin;
     vector<double>yellowBegin;
     vector<double>brownBegin;
-    vector<double>whiteBegin;
-    vector<double>blackBegin;
+    //vector<double>whiteBegin;
+    //vector<double>blackBegin;
     
 
     vector<double>dist_euclidiana;

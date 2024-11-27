@@ -75,12 +75,12 @@ void loop() {
         case Brown:
             Serial.println("Cor mais próxima: Marrom");
             break;
-        case White:
+        /*case White:
             Serial.println("Cor mais próxima: Branco");
             break;
         case Black:
             Serial.println("Cor mais próxima: Preto");
-            break; 
+            break; */
         default:
             Serial.println("Nenhuma cor detectada");
             break;
