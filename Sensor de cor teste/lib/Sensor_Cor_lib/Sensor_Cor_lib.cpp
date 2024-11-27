@@ -1,4 +1,4 @@
-#include "Sensor_teste.hpp"
+#include "Sensor_Cor_lib.hpp"
 #include <ArduinoSTL.h>  // Biblioteca que traz o STL para Arduino
 #include <Arduino.h>
 #include "Adafruit_NeoPixel.h"

@@ -1,5 +1,5 @@
-#ifndef SENSOR_TESTE_HPP
-#define SENSOR_TESTE_HPP
+#ifndef SENSOR_COR_LIB_HPP
+#define SENSOR_COR_LIB_HPP
 
 #include <Arduino.h>
 #include <ArduinoSTL.h>  // Biblioteca que traz o STL para Arduino
@@ -66,4 +66,4 @@ class ColorSensorAnalog {
 
 
 
-#endif // SENSOR_TESTE_HPP
+#endif //SENSOR_COR_LIB_HPP
