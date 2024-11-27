@@ -57,7 +57,7 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   brownBegin[2]=0.00;
   brownBegin[3]=0.00;
 
- /* whiteBegin.resize(4);
+  whiteBegin.resize(4);
   whiteBegin[0]=0.00;
   whiteBegin[1]=0.00;
   whiteBegin[2]=0.00;
@@ -67,7 +67,7 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   blackBegin[0]=0.00;
   blackBegin[1]=0.00;
   blackBegin[2]=0.00;
-  blackBegin[3]=0.00; */
+  blackBegin[3]=0.00; 
   
   
   
@@ -195,7 +195,7 @@ double ColorSensorAnalog::getWhite() const {
 //Calibração das cores, a primeira leitura.
 void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
   
-  switch (cor) { 
+  switch(cor) { 
     // Realiza a leitura das cores
     
     case Red:
@@ -244,7 +244,7 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       cout << "Marrom " << brownBegin[0] << '\t' << brownBegin[1] << '\t' << brownBegin[2] << '\t' << brownBegin[3] << endl;
       break;
 
-     /*case White:
+     case White:
       readColor();
       whiteBegin[0] = getRed();
       whiteBegin[1] = getGreen();
@@ -260,21 +260,32 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       blackBegin[2] = getBlue();
       blackBegin[3] = getWhite();
       cout << "Marrom " << blackBegin[0] << '\t' << blackBegin[1] << '\t' << blackBegin[2] << '\t' << blackBegin[3] << endl;
-      break;*/
+      break;
+
+      case None:
+      readColor();
+      blackBegin[0] = 0;
+      blackBegin[1] = 0;
+      blackBegin[2] = 0;
+      blackBegin[3] = 0;
+      break;
+
+
 
   }
     
 }
 
 
-void ColorSensorAnalog::Distancia_Euclidiana(){  //MUDAR FUNÇÃO POR ALGO MAIS GERAL 
+COLOR ColorSensorAnalog::getColor(){ 
+  //Fazendo a Distância Euclidiana 
   double vermelho= sqrt(pow(redBegin[0]-getRed(),2)+ pow(redBegin[1]-getGreen(),2)+ pow(redBegin[2]-getBlue(),2));
   double verde = sqrt(pow(greenBegin[0]-getRed(),2)+ pow(greenBegin[1]-getGreen(),2)+ pow(greenBegin[2]-getBlue(),2));
   double azul = sqrt(pow(blueBegin[0]-getRed(),2)+ pow(blueBegin[1]-getGreen(),2)+ pow(blueBegin[2]-getBlue(),2));
   double amarelo = sqrt(pow(yellowBegin[0]-getRed(),2)+ pow(yellowBegin[1]-getGreen(),2)+ pow(yellowBegin[2]-getBlue(),2));
   double marrom = sqrt(pow(brownBegin[0]-getRed(),2)+ pow(brownBegin[1]-getGreen(),2)+ pow(brownBegin[2]-getBlue(),2));
-  //double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
-  //double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
+  double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
+  double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
 
     // Determinando a cor com a menor distância
     double menor = vermelho;
@@ -297,40 +308,15 @@ void ColorSensorAnalog::Distancia_Euclidiana(){  //MUDAR FUNÇÃO POR ALGO MAIS 
         cor = Brown;
     }
 
-    /*if (branco < menor) {
+    if (branco < menor) {
         menor = marrom;
         cor = White;
     }
     if (preto < menor) {
         menor = marrom;
         cor = Black;
-    } */
+    } 
 
-    // Exibindo a cor detectada pela menor distância euclidiana
-    switch (cor) {
-        case Red:
-            Serial.println("Cor mais próxima: Vermelho");
-            break;
-        case Green:
-            Serial.println("Cor mais próxima: Verde");
-            break;
-        case Blue:
-            Serial.println("Cor mais próxima: Azul");
-            break;
-        case Yellow:
-            Serial.println("Cor mais próxima: Amarelo");
-            break;
-        case Brown:
-            Serial.println("Cor mais próxima: Marrom");
-            break;
-        /*case White:
-            Serial.println("Cor mais próxima: Branco");
-            break;
-        case Black:
-            Serial.println("Cor mais próxima: Preto");
-            break; */
-        default:
-            Serial.println("Nenhuma cor detectada");
-            break;
-    }
+    return cor;
+
   }

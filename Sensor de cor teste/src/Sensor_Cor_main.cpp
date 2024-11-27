@@ -44,8 +44,8 @@ void loop() {
   else if(cor_digitada=="azul") colorSensor.Sensor_Calibracao(Blue);
   else if(cor_digitada=="amarelo") colorSensor.Sensor_Calibracao(Yellow);
   else if(cor_digitada=="marrom") colorSensor.Sensor_Calibracao(Brown);
-  //else if(cor_digitada=="branco") colorSensor.Sensor_Calibracao(White);
-  //else if(cor_digitada=="preto") colorSensor.Sensor_Calibracao(Black);
+  else if(cor_digitada=="branco") colorSensor.Sensor_Calibracao(White);
+  else if(cor_digitada=="preto") colorSensor.Sensor_Calibracao(Black);
   cout << "Nova leitura?";
   cin >> resposta;
   cout << endl;
@@ -56,7 +56,35 @@ void loop() {
     cin >> resposta;
     cout << endl;
     colorSensor.readColor();
-    colorSensor.Distancia_Euclidiana();
+    cor = colorSensor.getColor();
+    // Exibindo a cor detectada pela menor distância euclidiana
+    
+    switch (cor) {
+        case Red:
+            Serial.println("Cor mais próxima: Vermelho");
+            break;
+        case Green:
+            Serial.println("Cor mais próxima: Verde");
+            break;
+        case Blue:
+            Serial.println("Cor mais próxima: Azul");
+            break;
+        case Yellow:
+            Serial.println("Cor mais próxima: Amarelo");
+            break;
+        case Brown:
+            Serial.println("Cor mais próxima: Marrom");
+            break;
+        case White:
+            Serial.println("Cor mais próxima: Branco");
+            break;
+        case Black:
+            Serial.println("Cor mais próxima: Preto");
+            break; 
+        default:
+            Serial.println("Nenhuma cor detectada");
+            break;
+    } 
    }while(resposta=="testar");
      
   
