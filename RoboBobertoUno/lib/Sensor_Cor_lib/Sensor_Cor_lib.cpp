@@ -25,50 +25,49 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   whiteValues.resize(NUM_SAMPLES + 1);
   fill(whiteValues.begin(), whiteValues.end(), 0);
 
-  //Inicializando os vetores da calobração com zero
+    //Inicializando os vetores da calobração com zero
   redBegin.resize(4);
-  redBegin[0]=0.00;
-  redBegin[1]=0.00;
-  redBegin[2]=0.00;
-  redBegin[3]=0.00;
+  redBegin[0]=918.00;
+  redBegin[1]=778.00;
+  redBegin[2]=732.00;
+  redBegin[3]=732.00;
 
   greenBegin.resize(4);
-  greenBegin[0]=0.00;
-  greenBegin[1]=0.00;
-  greenBegin[2]=0.00;
-  greenBegin[3]=0.00;
+  greenBegin[0]=806.00;
+  greenBegin[1]=786.00;
+  greenBegin[2]=699.00;
+  greenBegin[3]=855.00;
 
   blueBegin.resize(4);
-  blueBegin[0]=0.00;
-  blueBegin[1]=0.00;
-  blueBegin[2]=0.00;
-  blueBegin[3]=0.00;
+  blueBegin[0]=775.00;
+  blueBegin[1]=683.00;
+  blueBegin[2]=711.00;
+  blueBegin[3]=837.00;
 
   yellowBegin.resize(4);
-  yellowBegin[0]=0.00;
-  yellowBegin[1]=0.00;
-  yellowBegin[2]=0.00;
-  yellowBegin[3]=0.00;
+  yellowBegin[0]=926.00;
+  yellowBegin[1]=884.00;
+  yellowBegin[2]=835.00;
+  yellowBegin[3]=945.00;
  
 
   brownBegin.resize(4);
-  brownBegin[0]=0.00;
-  brownBegin[1]=0.00;
-  brownBegin[2]=0.00;
-  brownBegin[3]=0.00;
+  brownBegin[0]=810.00;
+  brownBegin[1]=703.00;
+  brownBegin[2]=654.00;
+  brownBegin[3]=827.00;
 
-  /*whiteBegin.resize(4);
-  whiteBegin[0]=0.00;
-  whiteBegin[1]=0.00;
-  whiteBegin[2]=0.00;
-  whiteBegin[3]=0.00;
+  whiteBegin.resize(4);
+  whiteBegin[0]=931.00;
+  whiteBegin[1]=883.00;
+  whiteBegin[2]=861.00;
+  whiteBegin[3]=951.00;
 
   blackBegin.resize(4);
-  blackBegin[0]=0.00;
-  blackBegin[1]=0.00;
-  blackBegin[2]=0.00;
-  blackBegin[3]=0.00; */
-  
+  blackBegin[0]=730.00;
+  blackBegin[1]=630.00;
+  blackBegin[2]=600.00;
+  blackBegin[3]=750.00; 
   
   
 
@@ -159,7 +158,6 @@ void ColorSensorAnalog::readColor() {
       cout << whiteValues[i] << endl;*/
     delay(DELAY_TESTE);
 
-
     changeColor(None);  // Apaga os LEDs entre leituras
   }
 }
@@ -193,7 +191,7 @@ double ColorSensorAnalog::getWhite() const {
 
 
 //Calibração das cores, a primeira leitura.
-void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
+/*void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
   
   switch(cor) { 
     // Realiza a leitura das cores
@@ -244,7 +242,7 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       cout << "Marrom " << brownBegin[0] << '\t' << brownBegin[1] << '\t' << brownBegin[2] << '\t' << brownBegin[3] << endl;
       break;
 
-    /* case White:
+     case White:
       readColor();
       whiteBegin[0] = getRed();
       whiteBegin[1] = getGreen();
@@ -260,13 +258,12 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       blackBegin[2] = getBlue();
       blackBegin[3] = getWhite();
       cout << "Marrom " << blackBegin[0] << '\t' << blackBegin[1] << '\t' << blackBegin[2] << '\t' << blackBegin[3] << endl;
-      break; */
+      break; 
 
 
-  }
+  } 
     
-}
-
+}*/
 
 COLOR ColorSensorAnalog::getColor(){ 
   //Fazendo a Distância Euclidiana 
@@ -275,8 +272,8 @@ COLOR ColorSensorAnalog::getColor(){
   double azul = sqrt(pow(blueBegin[0]-getRed(),2)+ pow(blueBegin[1]-getGreen(),2)+ pow(blueBegin[2]-getBlue(),2));
   double amarelo = sqrt(pow(yellowBegin[0]-getRed(),2)+ pow(yellowBegin[1]-getGreen(),2)+ pow(yellowBegin[2]-getBlue(),2));
   double marrom = sqrt(pow(brownBegin[0]-getRed(),2)+ pow(brownBegin[1]-getGreen(),2)+ pow(brownBegin[2]-getBlue(),2));
-  //double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
-  //double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
+  double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
+  double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
 
     // Determinando a cor com a menor distância
     double menor = vermelho;
@@ -299,14 +296,14 @@ COLOR ColorSensorAnalog::getColor(){
         cor = Brown;
     }
 
-   /* if (branco < menor) {
-        menor = marrom;
+    if (branco < menor) {
+        menor = branco;
         cor = White;
     }
     if (preto < menor) {
-        menor = marrom;
+        menor = preto;
         cor = Black;
-    } */
+    } 
 
     return cor;
 

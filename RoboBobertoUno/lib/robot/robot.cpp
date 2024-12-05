@@ -2,10 +2,10 @@
 
 Robot::Robot() {
     // Inicia os pinos dos motores
-    frontRight.setPins(0, 22, 24);
-    frontLeft.setPins(0, 50, 52);
-    backLeft.setPins(0, 51, 53);
-    backRight.setPins(0, 33, 31);
+    frontRight.setPins(0, 11, 10);
+    frontLeft.setPins(0, 4, 5);
+    backLeft.setPins(0, 7, 6);
+    backRight.setPins(0, 8, 9);
 
     frontLeft.begin();
     frontRight.begin();
