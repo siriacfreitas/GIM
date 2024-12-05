@@ -27,47 +27,47 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
 
     //Inicializando os vetores da calobração com zero
   redBegin.resize(4);
-  redBegin[0]=918.00;
-  redBegin[1]=778.00;
-  redBegin[2]=732.00;
-  redBegin[3]=732.00;
+  redBegin[0]=725.00;
+  redBegin[1]=725.00;
+  redBegin[2]=725.00;
+  redBegin[3]=725.00;
 
   greenBegin.resize(4);
-  greenBegin[0]=806.00;
-  greenBegin[1]=786.00;
-  greenBegin[2]=699.00;
-  greenBegin[3]=855.00;
+  greenBegin[0]=0.00;
+  greenBegin[1]=0.00;
+  greenBegin[2]=0.00;
+  greenBegin[3]=0.00;
 
   blueBegin.resize(4);
-  blueBegin[0]=775.00;
-  blueBegin[1]=683.00;
-  blueBegin[2]=711.00;
-  blueBegin[3]=837.00;
+  blueBegin[0]=0.00;
+  blueBegin[1]=0.00;
+  blueBegin[2]=0.00;
+  blueBegin[3]=0.00;
 
   yellowBegin.resize(4);
-  yellowBegin[0]=926.00;
-  yellowBegin[1]=884.00;
-  yellowBegin[2]=835.00;
-  yellowBegin[3]=945.00;
+  yellowBegin[0]=0.00;
+  yellowBegin[1]=0.00;
+  yellowBegin[2]=0.00;
+  yellowBegin[3]=0.00;
  
 
   brownBegin.resize(4);
-  brownBegin[0]=810.00;
-  brownBegin[1]=703.00;
-  brownBegin[2]=654.00;
-  brownBegin[3]=827.00;
+  brownBegin[0]=0.00;
+  brownBegin[1]=0.00;
+  brownBegin[2]=0.00;
+  brownBegin[3]=0.00;
 
   whiteBegin.resize(4);
-  whiteBegin[0]=931.00;
-  whiteBegin[1]=883.00;
-  whiteBegin[2]=861.00;
-  whiteBegin[3]=951.00;
+  whiteBegin[0]=0.00;
+  whiteBegin[1]=0.00;
+  whiteBegin[2]=0.00;
+  whiteBegin[3]=0.00;
 
   blackBegin.resize(4);
-  blackBegin[0]=730.00;
-  blackBegin[1]=630.00;
-  blackBegin[2]=600.00;
-  blackBegin[3]=750.00; 
+  blackBegin[0]=0.00;
+  blackBegin[1]=0.00;
+  blackBegin[2]=0.00;
+  blackBegin[3]=0.00; 
   
   
 
@@ -130,7 +130,7 @@ void ColorSensorAnalog::readColor() {
     redValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o vermelho
     /*cout << "Vermelho " << i << endl;
       cout << redValues[i] << endl;*/
-    delay(DELAY_TESTE);
+    //delay(DELAY_TESTE);
 
 
     //Lê a cor Verde;
@@ -139,7 +139,7 @@ void ColorSensorAnalog::readColor() {
     greenValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o verde
     /*cout << "Verde " << i << endl;
       cout << greenValues[i] << endl;*/
-    delay(DELAY_TESTE);
+    //delay(DELAY_TESTE);
 
     //Lê a cor Azul;
     changeColor(Blue);
@@ -147,7 +147,7 @@ void ColorSensorAnalog::readColor() {
     blueValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o azul
     /*cout << "Azul " << i << endl;
       cout << blueValues[i] << endl;*/
-    delay(DELAY_TESTE);
+    //delay(DELAY_TESTE);
 
 
     //Lê a cor Branca;
@@ -156,7 +156,7 @@ void ColorSensorAnalog::readColor() {
     whiteValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o branco
     /*cout << ("Branco ")<<i << endl;
       cout << whiteValues[i] << endl;*/
-    delay(DELAY_TESTE);
+    //delay(DELAY_TESTE);
 
     changeColor(None);  // Apaga os LEDs entre leituras
   }
@@ -278,31 +278,38 @@ COLOR ColorSensorAnalog::getColor(){
     // Determinando a cor com a menor distância
     double menor = vermelho;
     COLOR cor = Red;
+    //cout << "Vermelho" << getRed() << getGreen() << getBlue() << endl;
 
     if (verde < menor) {
         menor = verde;
         cor = Green;
+        //cout << "Verde" << getRed() << getGreen() << getBlue() << endl;
     }
     if (azul < menor) {
         menor = azul;
         cor = Blue;
+        //cout << "Azul" << getRed() << getGreen() << getBlue() << endl;
     }
     if (amarelo < menor) {
         menor = amarelo;
         cor = Yellow;
+        //cout << "Amarelo" << getRed() << getGreen() << getBlue() << endl;
     }
     if (marrom < menor) {
         menor = marrom;
         cor = Brown;
+        //cout << "Marrom" << getRed() << getGreen() << getBlue() << endl;
     }
 
     if (branco < menor) {
         menor = branco;
         cor = White;
+        //cout << "Branco" << getRed() << getGreen() << getBlue() << endl;
     }
     if (preto < menor) {
         menor = preto;
         cor = Black;
+        //cout << "Preto" << getRed() << getGreen() << getBlue() << endl;
     } 
 
     return cor;
