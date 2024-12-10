@@ -25,12 +25,12 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   whiteValues.resize(NUM_SAMPLES + 1);
   fill(whiteValues.begin(), whiteValues.end(), 0);
 
-  //Inicializando os vetores da calobração com zero
+    //Inicializando os vetores da calobração com zero
   redBegin.resize(4);
-  redBegin[0]=0.00;
-  redBegin[1]=0.00;
-  redBegin[2]=0.00;
-  redBegin[3]=0.00;
+  redBegin[0]=725.00;
+  redBegin[1]=725.00;
+  redBegin[2]=725.00;
+  redBegin[3]=725.00;
 
   greenBegin.resize(4);
   greenBegin[0]=0.00;
@@ -57,7 +57,7 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   brownBegin[2]=0.00;
   brownBegin[3]=0.00;
 
-  /*whiteBegin.resize(4);
+  whiteBegin.resize(4);
   whiteBegin[0]=0.00;
   whiteBegin[1]=0.00;
   whiteBegin[2]=0.00;
@@ -67,8 +67,7 @@ ColorSensorAnalog::ColorSensorAnalog(uint8_t _digitalPin, uint8_t _analogPin) {
   blackBegin[0]=0.00;
   blackBegin[1]=0.00;
   blackBegin[2]=0.00;
-  blackBegin[3]=0.00; */
-  
+  blackBegin[3]=0.00; 
   
   
 
@@ -131,7 +130,7 @@ void ColorSensorAnalog::readColor() {
     redValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o vermelho
     /*cout << "Vermelho " << i << endl;
       cout << redValues[i] << endl;*/
-    delay(DELAY_TESTE);
+    //delay(DELAY_TESTE);
 
 
     //Lê a cor Verde;
@@ -140,7 +139,7 @@ void ColorSensorAnalog::readColor() {
     greenValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o verde
     /*cout << "Verde " << i << endl;
       cout << greenValues[i] << endl;*/
-    delay(DELAY_TESTE);
+    //delay(DELAY_TESTE);
 
     //Lê a cor Azul;
     changeColor(Blue);
@@ -148,7 +147,7 @@ void ColorSensorAnalog::readColor() {
     blueValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o azul
     /*cout << "Azul " << i << endl;
       cout << blueValues[i] << endl;*/
-    delay(DELAY_TESTE);
+    //delay(DELAY_TESTE);
 
 
     //Lê a cor Branca;
@@ -157,8 +156,7 @@ void ColorSensorAnalog::readColor() {
     whiteValues[i] = analogRead(ldrPin);  // Lê o valor do sensor para o branco
     /*cout << ("Branco ")<<i << endl;
       cout << whiteValues[i] << endl;*/
-    delay(DELAY_TESTE);
-
+    //delay(DELAY_TESTE);
 
     changeColor(None);  // Apaga os LEDs entre leituras
   }
@@ -193,7 +191,7 @@ double ColorSensorAnalog::getWhite() const {
 
 
 //Calibração das cores, a primeira leitura.
-void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
+/*void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
   
   switch(cor) { 
     // Realiza a leitura das cores
@@ -244,7 +242,7 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       cout << "Marrom " << brownBegin[0] << '\t' << brownBegin[1] << '\t' << brownBegin[2] << '\t' << brownBegin[3] << endl;
       break;
 
-    /* case White:
+     case White:
       readColor();
       whiteBegin[0] = getRed();
       whiteBegin[1] = getGreen();
@@ -260,13 +258,12 @@ void ColorSensorAnalog::Sensor_Calibracao(COLOR cor){
       blackBegin[2] = getBlue();
       blackBegin[3] = getWhite();
       cout << "Marrom " << blackBegin[0] << '\t' << blackBegin[1] << '\t' << blackBegin[2] << '\t' << blackBegin[3] << endl;
-      break; */
+      break; 
 
 
-  }
+  } 
     
-}
-
+}*/
 
 COLOR ColorSensorAnalog::getColor(){ 
   //Fazendo a Distância Euclidiana 
@@ -275,38 +272,45 @@ COLOR ColorSensorAnalog::getColor(){
   double azul = sqrt(pow(blueBegin[0]-getRed(),2)+ pow(blueBegin[1]-getGreen(),2)+ pow(blueBegin[2]-getBlue(),2));
   double amarelo = sqrt(pow(yellowBegin[0]-getRed(),2)+ pow(yellowBegin[1]-getGreen(),2)+ pow(yellowBegin[2]-getBlue(),2));
   double marrom = sqrt(pow(brownBegin[0]-getRed(),2)+ pow(brownBegin[1]-getGreen(),2)+ pow(brownBegin[2]-getBlue(),2));
-  //double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
-  //double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
+  double branco = sqrt(pow(whiteBegin[0]-getRed(),2)+ pow(whiteBegin[1]-getGreen(),2)+ pow(whiteBegin[2]-getBlue(),2));
+  double preto = sqrt(pow(blackBegin[0]-getRed(),2)+ pow(blackBegin[1]-getGreen(),2)+ pow(blackBegin[2]-getBlue(),2));
 
     // Determinando a cor com a menor distância
     double menor = vermelho;
     COLOR cor = Red;
+    //cout << "Vermelho" << getRed() << getGreen() << getBlue() << endl;
 
     if (verde < menor) {
         menor = verde;
         cor = Green;
+        //cout << "Verde" << getRed() << getGreen() << getBlue() << endl;
     }
     if (azul < menor) {
         menor = azul;
         cor = Blue;
+        //cout << "Azul" << getRed() << getGreen() << getBlue() << endl;
     }
     if (amarelo < menor) {
         menor = amarelo;
         cor = Yellow;
+        //cout << "Amarelo" << getRed() << getGreen() << getBlue() << endl;
     }
     if (marrom < menor) {
         menor = marrom;
         cor = Brown;
+        //cout << "Marrom" << getRed() << getGreen() << getBlue() << endl;
     }
 
-   /* if (branco < menor) {
-        menor = marrom;
+    if (branco < menor) {
+        menor = branco;
         cor = White;
+        //cout << "Branco" << getRed() << getGreen() << getBlue() << endl;
     }
     if (preto < menor) {
-        menor = marrom;
+        menor = preto;
         cor = Black;
-    } */
+        //cout << "Preto" << getRed() << getGreen() << getBlue() << endl;
+    } 
 
     return cor;
 

@@ -1,0 +1,66 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/include",
+                "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/src",
+                "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/robot",
+                "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/motor",
+                "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/.pio/libdeps/megaatmega2560/ArduinoSTL/src",
+                "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/variants/mega",
+                "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/Adafruit_NeoPixel",
+                "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/Sensor_Cor_lib",
+                "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/include",
+                    "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/src",
+                    "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/robot",
+                    "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/motor",
+                    "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/.pio/libdeps/megaatmega2560/ArduinoSTL/src",
+                    "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/variants/mega",
+                    "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/Adafruit_NeoPixel",
+                    "C:/Users/Lenovo/OneDrive/Documentos/GitHub/GIM_TESTE/RoboBoberto/lib/Sensor_Cor_lib",
+                    "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "C:/Users/Lenovo/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60116",
+                "ARDUINO_AVR_MEGA2560",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega2560__",
+                ""
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++11",
+            "compilerPath": "C:/Users/Lenovo/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega2560",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

@@ -8,10 +8,10 @@
 using namespace std;
 
 //Variáveis estáticas
-#define NUM_SAMPLES 10
+#define NUM_SAMPLES 6
 #define NUM_PIXELS 1
-#define COLOR_DELAY 20
-#define DELAY_TESTE 20
+#define COLOR_DELAY 10
+#define DELAY_TESTE 10
 
 //const string Aquivo ="cores_teste.txt";
 
@@ -37,8 +37,8 @@ class ColorSensorAnalog {
     vector<double>blueBegin;
     vector<double>yellowBegin;
     vector<double>brownBegin;
-    //vector<double>whiteBegin;
-    //vector<double>blackBegin;
+    vector<double>whiteBegin;
+    vector<double>blackBegin;
     
 
     vector<double>dist_euclidiana;
