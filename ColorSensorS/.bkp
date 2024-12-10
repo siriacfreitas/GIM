@@ -1,0 +1,227 @@
+#include "Adafruit_NeoPixel.h"
+#include <Arduino.h>
+
+#define NUM_PIXELS 1
+#define LED_PIN 2
+#define LDR_PIN A5
+#define TEMPO 5
+#define TEMPO_INTER_LEITURA 50
+#define TEMPO_ESTABILIZACAO 20
+#define TEMPO_ENTRE_PRINTS 2000
+
+char vez = 'r';
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUM_PIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+int leitura_r = 0;
+int leitura_g = 0;
+int leitura_b = 0;
+bool estabilizando_subida = true;
+
+
+
+
+inline int ldr_get_value() {
+  return analogRead(LDR_PIN);
+}
+
+
+inline void set_pixel_red() {
+  pixels.setPixelColor(0, pixels.Color(255,0, 0));  // Azul
+  pixels.show();
+}
+
+inline void set_pixel_green() {
+  pixels.setPixelColor(0, pixels.Color(0,255, 0));  // Azul
+  //pixels.show();
+}
+
+inline void set_pixel_blue() {
+  pixels.setPixelColor(0, pixels.Color(0,0, 255));  // Azul
+  //pixels.show();
+}
+
+inline void set_pixel_white() {
+  pixels.setPixelColor(0, pixels.Color(255,255, 255));  // Azul
+  //pixels.show();
+}
+
+inline void set_pixel_off() {
+  pixels.setPixelColor(0, pixels.Color(0,0, 0));  // Azul
+  pixels.show();
+}
+
+
+void read_red() {
+      set_pixel_red();
+      delay(TEMPO);
+      leitura_r = ldr_get_value();
+      delay(TEMPO);
+      set_pixel_off();
+}
+
+void read_green() {
+  set_pixel_green();
+  delay(TEMPO);
+  leitura_g = ldr_get_value();
+  delay(TEMPO);
+  set_pixel_off();
+}
+
+void read_blue() {
+      set_pixel_blue();
+      delay(TEMPO);
+      leitura_b = ldr_get_value();
+      delay(TEMPO);
+      set_pixel_off();
+}
+
+void read_all() {
+  read_red();
+  delay(TEMPO_INTER_LEITURA);
+  read_green();
+  delay(TEMPO_INTER_LEITURA);
+  read_blue();
+}
+
+
+void setup() {
+  Serial.begin(9600);
+  pixels.begin();
+  set_pixel_off();
+
+  delay(2000);
+  Serial.println("p - printa valores rgb armazenados");
+  Serial.println("r - realiza leitura do vermelho");
+  Serial.println("g - realiza leitura do verde");
+  Serial.println("b - realiza leitura do azul");
+  Serial.println("p - printa valores rgb armazenados");
+
+
+}
+
+long last_time_leitura = 0;
+long last_time_estabilizacao = -1;
+long last_time_print = 0;
+
+
+enum EstadoProcesso {
+  OFF,  // 0
+  ON    // 1
+};
+
+enum EstadoLeitura {
+  LIGA,
+  ESPERA_SUBIDA,
+  LEITURA,
+  ESPERA_DECIDA,
+  DESLIGA
+};
+
+enum TiposDeLeitura {
+  VERMELHO,
+  VERDE,
+  AZUL
+};
+
+
+EstadoProcesso processo_de_leitura = OFF;
+EstadoLeitura estado_leitura = LIGA;
+TiposDeLeitura leitura_atual = VERMELHO;
+
+long count_simples = 0;
+
+void loop() {
+
+    if(millis() - last_time_leitura > TEMPO_INTER_LEITURA) processo_de_leitura = ON;
+
+    if(processo_de_leitura == ON) {
+      
+      switch (estado_leitura)
+      {
+        case LIGA:
+          switch (leitura_atual){
+            case VERMELHO:
+              set_pixel_red();
+              break;
+
+            case VERDE:
+              set_pixel_green();
+              break;
+
+            case AZUL:
+              set_pixel_blue();
+              break;
+          }
+        estado_leitura = ESPERA_SUBIDA;
+        count_simples = millis();
+        break;
+
+        case ESPERA_SUBIDA:
+          if(millis() - count_simples > TEMPO_ESTABILIZACAO) {
+            estado_leitura = LEITURA;
+          }
+        break;
+
+        case LEITURA:
+          switch (leitura_atual){
+            case VERMELHO:
+              leitura_r = ldr_get_value();
+              break;
+
+            case VERDE:
+              leitura_g = ldr_get_value();
+              break;
+
+            case AZUL:
+              leitura_b = ldr_get_value();
+              break;
+          }
+
+          estado_leitura = ESPERA_DECIDA;
+          count_simples = millis();
+        break;
+
+        case ESPERA_DECIDA:
+          if(millis() - count_simples > TEMPO_ESTABILIZACAO) {
+            estado_leitura = DESLIGA;
+          }
+
+        break;
+
+        case DESLIGA:
+          set_pixel_off();
+
+          switch (leitura_atual){
+            case VERMELHO:
+              leitura_atual = VERDE;
+              break;
+
+            case VERDE:
+              leitura_atual = AZUL;
+              break;
+
+            case AZUL:
+              leitura_atual = VERMELHO;
+              break;
+          }
+          estado_leitura = LIGA;
+          processo_de_leitura = OFF;
+          last_time_leitura = millis();
+        break;
+    
+      }
+    }
+
+    if(millis() - last_time_print > TEMPO_ENTRE_PRINTS) {
+      Serial.print(leitura_r);
+      Serial.print(' ');
+      Serial.print(leitura_g);
+      Serial.print(' ');
+      Serial.print(leitura_b);
+      Serial.print('\n');
+      last_time_print = millis();
+    }
+
+}
+
